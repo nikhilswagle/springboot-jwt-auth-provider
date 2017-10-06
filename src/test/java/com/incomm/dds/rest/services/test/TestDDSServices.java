@@ -19,7 +19,7 @@ import com.jlearning.springboot.rest.security.util.SecurityServiceUtil;
 /**
  * 
  * @file TestDDSServices.java
- * @author dwagle
+ * @author nikhilswagle
  * @date Sep 29, 2017
  * @time 3:33:05 PM
  */
@@ -59,13 +59,13 @@ public class TestDDSServices {
 	public void testCreateJwt(){
 		JWTHeader header = new JWTHeader("JWT");
 		JWTPayload payload = new JWTPayload();
-		payload.setAudience("DDA");
+		payload.setAudience("EVERYONE");
 		payload.setExpiryInSeconds(300);
 		long nowMillis = System.currentTimeMillis();
 	    Date now = new Date(nowMillis);
 		payload.setIssuedAt(now);
-		payload.setIssuer("DDS Incomm");
-		payload.setSubject("Authentication to access DDS Services");
+		payload.setIssuer("JWT AUTH PROVIDER (http://damodar-jlearning.blogspot.com)");
+		payload.setSubject("JWT AUTHENTICATION");
 		payload.setTokenId(String.valueOf(UUID.randomUUID()));
 		JWT request = new JWT(header, payload);
 		jwt = jwtUtil.createJWT(request, signingKey);
