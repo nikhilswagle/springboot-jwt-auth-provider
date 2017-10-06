@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="%-5p %d [%t] %c: %m%n"/>
+        </Console>			
+	</Appenders>
+	
+    <Loggers>
+
+        <!-- Apache Commons tend to make a lot of noise which can clutter the log-->
+        <AsyncLogger name="org.apache" level="WARN"/>
+
+        <!-- Reduce startup noise -->
+        <AsyncLogger name="org.springframework.beans.factory" level="WARN"/>
+
+        <AsyncRoot level="DEBUG">
+            <AppenderRef ref="console"/>
+        </AsyncRoot>
+		
+		<!-- <AsyncLogger name="com.jlearning.springboot.rest" level="DEBUG">
+			<AppenderRef ref="console"/>
+		</AsyncLogger> -->
+
+    </Loggers>
+
+</Configuration>
