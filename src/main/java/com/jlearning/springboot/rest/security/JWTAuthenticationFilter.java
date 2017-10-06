@@ -49,8 +49,8 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
 	 */
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response){
-		String accessId = request.getParameter("accessId");
-		String secret = request.getParameter("secret");
+		String accessId = request.getHeader("accessId");
+		String secret = request.getHeader("secret");
 		logger.info("Authenticating for accessId = "+accessId+" and secret="+secret);
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(accessId, secret, Collections.emptyList());		
 		return this.getAuthenticationManager().authenticate(authentication);
@@ -64,7 +64,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
 	protected void successfulAuthentication(HttpServletRequest request,
 			HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		String accessId = request.getParameter("accessId");
+		String accessId = request.getHeader("accessId");
 		String token = jwt.buildJWT(accessId);
 		response.addHeader(SecurityConstants.RESPONSE_HEADER_PARAM_JWT, token);
 		logger.debug(token);
